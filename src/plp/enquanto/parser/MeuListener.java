@@ -44,7 +44,16 @@ public class MeuListener extends EnquantoBaseListener {
 		final Comando senao = (Comando) getValue(ctx.comando(1));
 		setValue(ctx, new Se(condicao, entao, senao));
 	}
-
+	@Override
+	public void exitPara(final EnquantoParser.ParaContext ctx) {
+		final Expressao de = (Expressao) getValue(ctx.expressao(0));
+		final Expressao ate = (Expressao) getValue(ctx.expressao(1));
+		final String para = (String) getValue(ctx.ID());
+		final Integer passo = (Integer) getValue(ctx.INT());
+		final Comando comando = (Comando) getValue(ctx.comando());
+		setValue(ctx, new Para(para, de, ate, passo, comando));
+	}
+	
 	@Override
 	public void exitInteiro(final EnquantoParser.InteiroContext ctx) {
 		setValue(ctx, new Inteiro(Integer.parseInt(ctx.getText())));

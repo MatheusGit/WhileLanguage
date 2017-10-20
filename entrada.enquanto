@@ -1,6 +1,5 @@
 exiba "Funciona!";
 
-n := 100;
-escreva n;
-i := n^2;
-escreva i;
+para i de 1 ate 5 passo 2 faca {
+	escreva i
+}

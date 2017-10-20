@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import plp.enquanto.linguagem.Linguagem.Comando;
+import plp.enquanto.linguagem.Linguagem.Expressao;
+import plp.enquanto.linguagem.Linguagem.Para;
+
 public interface Linguagem {
 	final Map<String, Integer> ambiente = new HashMap<>();
 	final Scanner scanner = new Scanner(System.in);
@@ -42,7 +46,50 @@ public interface Linguagem {
 			}
 		}
 	}
-
+	class Para implements Comando {
+				
+		private Comando comando;
+		private Expressao de, ate;
+		private Integer passo;
+		private String para;	
+		
+		public Para(String para ,Expressao de, Expressao ate, int passo, Comando comando) {
+			this.de = de;
+			this.ate = ate;
+			this.para = para;
+			this.passo = passo;
+			this.comando = comando;
+		}
+		
+		@Override
+		public void execute() {
+			boolean inOrder;
+			int maior, menor;
+			if(ate.getValor() > de.getValor()) {
+				maior = ate.getValor();
+				menor = de.getValor();
+				inOrder = true;
+			}else {
+				menor = ate.getValor();
+				maior = de.getValor();
+				inOrder = false;
+			}
+			if(inOrder) {
+				ambiente.put(para, menor);
+				while(maior > ambiente.get(para)) {
+					comando.execute();
+					ambiente.put(para, ambiente.get(para)+passo);
+				}; 
+			}else {
+				ambiente.put(para, maior);
+				while(menor < ambiente.get(para)) {
+					comando.execute();
+					ambiente.put(para, ambiente.get(para)-passo);
+				}; 
+			}
+			comando.execute();
+		}
+	}
 	class Se implements Comando {
 		private Bool condicao;
 		private Comando entao;
