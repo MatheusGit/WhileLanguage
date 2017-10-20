@@ -1,0 +1,6 @@
+exiba "Funciona!";
+
+n := 100;
+escreva n;
+i := n^2;
+escreva i;
