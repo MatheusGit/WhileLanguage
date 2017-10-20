@@ -272,7 +272,6 @@ public class EnquantoParser extends Parser {
 		public ExpressaoContext expressao(int i) {
 			return getRuleContext(ExpressaoContext.class,i);
 		}
-		public TerminalNode INT() { return getToken(EnquantoParser.INT, 0); }
 		public ComandoContext comando() {
 			return getRuleContext(ComandoContext.class,0);
 		}
@@ -436,7 +435,7 @@ public class EnquantoParser extends Parser {
 				setState(50);
 				match(T__15);
 				setState(51);
-				match(INT);
+				expressao(0);
 				setState(52);
 				match(T__7);
 				setState(53);
@@ -1059,7 +1058,7 @@ public class EnquantoParser extends Parser {
 		"\b\2\2\37 \5\6\4\2 :\3\2\2\2!\"\7\t\2\2\"#\5\n\6\2#$\7\n\2\2$%\5\6\4\2"+
 		"%:\3\2\2\2&\'\7\13\2\2\':\7\'\2\2()\7\f\2\2):\5\b\5\2*+\7\r\2\2+,\5\4"+
 		"\3\2,-\7\16\2\2-:\3\2\2\2./\7\17\2\2/\60\7&\2\2\60\61\7\20\2\2\61\62\5"+
-		"\b\5\2\62\63\7\21\2\2\63\64\5\b\5\2\64\65\7\22\2\2\65\66\7%\2\2\66\67"+
+		"\b\5\2\62\63\7\21\2\2\63\64\5\b\5\2\64\65\7\22\2\2\65\66\5\b\5\2\66\67"+
 		"\7\n\2\2\678\5\6\4\28:\3\2\2\29\26\3\2\2\29\31\3\2\2\29\32\3\2\2\29!\3"+
 		"\2\2\29&\3\2\2\29(\3\2\2\29*\3\2\2\29.\3\2\2\2:\7\3\2\2\2;<\b\5\1\2<D"+
 		"\7%\2\2=D\7\23\2\2>D\7&\2\2?@\7\31\2\2@A\5\b\5\2AB\7\32\2\2BD\3\2\2\2"+

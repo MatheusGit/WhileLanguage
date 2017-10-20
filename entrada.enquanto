@@ -1,5 +1,3 @@
-exiba "Funciona!";
-
-para i de 1 ate 5 passo 2 faca {
-	escreva i
+para i de 6 ate 1 passo 3 faca {
+	escreva i 
 }

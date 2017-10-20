@@ -49,11 +49,10 @@ public interface Linguagem {
 	class Para implements Comando {
 				
 		private Comando comando;
-		private Expressao de, ate;
-		private Integer passo;
+		private Expressao de, ate, passo;
 		private String para;	
 		
-		public Para(String para ,Expressao de, Expressao ate, int passo, Comando comando) {
+		public Para(String para ,Expressao de, Expressao ate, Expressao passo, Comando comando) {
 			this.de = de;
 			this.ate = ate;
 			this.para = para;
@@ -63,6 +62,7 @@ public interface Linguagem {
 		
 		@Override
 		public void execute() {
+
 			boolean inOrder;
 			int maior, menor;
 			if(ate.getValor() > de.getValor()) {
@@ -73,21 +73,21 @@ public interface Linguagem {
 				menor = ate.getValor();
 				maior = de.getValor();
 				inOrder = false;
-			}
+			};
+			
 			if(inOrder) {
 				ambiente.put(para, menor);
 				while(maior > ambiente.get(para)) {
 					comando.execute();
-					ambiente.put(para, ambiente.get(para)+passo);
+					ambiente.put(para, ambiente.get(para)+passo.getValor());
 				}; 
 			}else {
 				ambiente.put(para, maior);
 				while(menor < ambiente.get(para)) {
 					comando.execute();
-					ambiente.put(para, ambiente.get(para)-passo);
+					ambiente.put(para, ambiente.get(para)-passo.getValor());
 				}; 
 			}
-			comando.execute();
 		}
 	}
 	class Se implements Comando {
