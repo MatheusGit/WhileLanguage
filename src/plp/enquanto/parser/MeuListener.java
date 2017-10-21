@@ -39,20 +39,40 @@ public class MeuListener extends EnquantoBaseListener {
 
 	@Override
 	public void exitSe(final EnquantoParser.SeContext ctx) {
-		final Bool condicao = (Bool) getValue(ctx.bool());
-		final Comando entao = (Comando) getValue(ctx.comando(0));
-		final Comando senao = (Comando) getValue(ctx.comando(1));
-		setValue(ctx, new Se(condicao, entao, senao));
+		final ArrayList<Bool> condicao = new ArrayList<>();
+		final ArrayList<Comando> comando = new ArrayList<>();; 
+		for (int i = 0; i < ctx.bool().size(); i++) {
+			condicao.add((Bool) getValue(ctx.bool(i)));
+		}
+		for (int i = 0; i < ctx.comando().size(); i++) {
+			comando.add((Comando) getValue(ctx.comando(i)));
+		}
+		setValue(ctx, new Se(condicao, comando));
 	}
+	
+	@Override
+	public void exitEscolha(final EnquantoParser.EscolhaContext ctx) {
+		final String id = ctx.ID().getText();
+		final ArrayList<Expressao> expressao = new ArrayList<>();
+		final ArrayList<Comando> comando = new ArrayList<>();
+		for (int i = 0; i < ctx.expressao().size(); i++) {
+			expressao.add((Expressao) getValue(ctx.expressao(i)));
+		}
+		for (int i = 0; i < ctx.comando().size(); i++) {
+			comando.add((Comando) getValue(ctx.comando(i)));
+		}
+		setValue(ctx, new Escolha(id, expressao, comando));
+	}
+	
 	@Override
 	public void exitPara(final EnquantoParser.ParaContext ctx) {
 		final Expressao de = (Expressao) getValue(ctx.expressao(0));
 		final Expressao ate = (Expressao) getValue(ctx.expressao(1));
 		final Expressao passo = (Expressao) getValue(ctx.expressao(2));
+		final int passoStr = passo != null ? passo.getValor() : 1;
 		final String para = (String) ctx.ID().getText();
 		final Comando comando = (Comando) getValue(ctx.comando());
-		
-		setValue(ctx, new Para(para, de, ate, passo, comando));
+		setValue(ctx, new Para(para, de, ate, passoStr, comando));
 	}
 	
 	@Override
@@ -202,6 +222,12 @@ public class MeuListener extends EnquantoBaseListener {
 			break;
 		case "<>":
 			exp = new ExpDiferente(esq, dir);
+			break;
+		case "<":
+			exp = new ExpMenor(esq, dir);
+			break;
+		case ">":
+			exp = new ExpMaior(esq, dir);
 			break;
 		default:
 			exp = new ExpIgual(esq, dir);

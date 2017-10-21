@@ -1,10 +1,12 @@
 package plp.enquanto.linguagem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import plp.enquanto.linguagem.Linguagem.Bool;
 import plp.enquanto.linguagem.Linguagem.Comando;
 import plp.enquanto.linguagem.Linguagem.Expressao;
 import plp.enquanto.linguagem.Linguagem.Para;
@@ -49,10 +51,11 @@ public interface Linguagem {
 	class Para implements Comando {
 				
 		private Comando comando;
-		private Expressao de, ate, passo;
+		private Expressao de, ate;
+		private int passo;
 		private String para;	
 		
-		public Para(String para ,Expressao de, Expressao ate, Expressao passo, Comando comando) {
+		public Para(String para ,Expressao de, Expressao ate, int passo, Comando comando) {
 			this.de = de;
 			this.ate = ate;
 			this.para = para;
@@ -79,34 +82,68 @@ public interface Linguagem {
 				ambiente.put(para, menor);
 				while(maior > ambiente.get(para)) {
 					comando.execute();
-					ambiente.put(para, ambiente.get(para)+passo.getValor());
+					ambiente.put(para, ambiente.get(para)+passo);
 				}; 
 			}else {
 				ambiente.put(para, maior);
 				while(menor < ambiente.get(para)) {
 					comando.execute();
-					ambiente.put(para, ambiente.get(para)-passo.getValor());
+					ambiente.put(para, ambiente.get(para)-passo);
 				}; 
 			}
 		}
 	}
-	class Se implements Comando {
-		private Bool condicao;
-		private Comando entao;
-		private Comando senao;
-
-		public Se(Bool condicao, Comando entao, Comando senao) {
-			this.condicao = condicao;
-			this.entao = entao;
-			this.senao = senao;
+	class Escolha implements Comando {		
+		private ArrayList<Expressao> expressao;
+		private ArrayList<Comando> comando; 
+		private String id;
+		public Escolha(String id, ArrayList<Expressao> expressao, ArrayList<Comando> comando) {
+			this.id = id;
+			this.expressao = expressao;
+			this.comando = comando;
 		}
 
 		@Override
 		public void execute() {
-			if (condicao.getValor())
-				entao.execute();
-			else
-				senao.execute();
+			Integer valor = ambiente.get(id);
+			boolean controle = true;
+			for (int i = 0; i < expressao.size() && controle; i++) {
+				//Verifica condicão a condição até encontrar uma que seja possitiva, executa seu comando e para o loop
+				if(expressao.get(i).getValor() == valor) {
+					controle = false;
+					comando.get(i).execute();
+				}
+			}
+			if(controle == true) {
+				//Caso nenhuma condição seja verdadeira, executa o senão
+				comando.get(comando.size()-1).execute();
+			}
+		}
+	}
+	
+	class Se implements Comando {		
+		private ArrayList<Bool> condicao;
+		private ArrayList<Comando> comando; 
+		
+		public Se(ArrayList<Bool> condicao, ArrayList<Comando> comando) {
+			this.condicao = condicao;
+			this.comando = comando;
+		}
+
+		@Override
+		public void execute() {
+			boolean controle = true;
+			for (int i = 0; i < condicao.size() && controle; i++) {
+				//Verifica condicão a condição até encontrar uma que seja possitiva, executa seu comando e para o loop
+				if(condicao.get(i).getValor()) {
+					controle = false;
+					comando.get(i).execute();
+				}
+			}
+			if(controle == true) {
+				//Caso nenhuma condição seja verdadeira, executa o senão
+				comando.get(comando.size()-1).execute();
+			}
 		}
 	}
 
@@ -285,6 +322,28 @@ public interface Linguagem {
 		public int getValor() {
 			return esq.getValor() * dir.getValor();
 		}
+	}
+	
+	class ExpMaior extends ExpRel {
+		public ExpMaior(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() > dir.getValor();
+		}
+	}
+	
+	class ExpMenor extends ExpRel {
+		public ExpMenor(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() < dir.getValor();
+		};
 	}
 
 	class Booleano implements Bool {

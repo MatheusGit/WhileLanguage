@@ -1,3 +1,18 @@
-para i de 6 ate 1 passo 3 faca {
-	escreva i 
-}
+para i de 0 ate 6 faca {
+	escreva i
+};
+nota := leia;
+se nota >= 6 entao
+      exiba "Aprovado"
+    senaose nota > 4 entao
+      exiba "Recuperação"
+    senaose nota > 2 entao
+      exiba "Recuperação2"
+    senao
+      exiba "Reprovado";
+      
+x := 30;
+escolha x
+    caso 10 : exiba "um"
+    caso 20 : exiba "dois"
+    outro  : exiba "outro numero"
