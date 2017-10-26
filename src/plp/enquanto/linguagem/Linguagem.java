@@ -64,29 +64,16 @@ public interface Linguagem {
 		}
 		
 		@Override
-		public void execute() {
-
-			boolean inOrder;
-			int maior, menor;
+		public void execute() {		
 			if(ate.getValor() > de.getValor()) {
-				maior = ate.getValor();
-				menor = de.getValor();
-				inOrder = true;
-			}else {
-				menor = ate.getValor();
-				maior = de.getValor();
-				inOrder = false;
-			};
-			
-			if(inOrder) {
-				ambiente.put(para, menor);
-				while(maior > ambiente.get(para)) {
+				ambiente.put(para, de.getValor());
+				while(ate.getValor() >= ambiente.get(para)) {
 					comando.execute();
 					ambiente.put(para, ambiente.get(para)+passo);
 				}; 
 			}else {
-				ambiente.put(para, maior);
-				while(menor < ambiente.get(para)) {
+				ambiente.put(para, de.getValor());
+				while(ate.getValor() <= ambiente.get(para)) {
 					comando.execute();
 					ambiente.put(para, ambiente.get(para)-passo);
 				}; 

@@ -44,7 +44,7 @@ public class EnquantoLexer extends Lexer {
 		null, "';'", "':='", "'skip'", "'se'", "'entao'", "'senaose'", "'senao'", 
 		"'enquanto'", "'faca'", "'exiba'", "'escreva'", "'{'", "'}'", "'para'", 
 		"'de'", "'ate'", "'passo'", "'escolha'", "'caso'", "':'", "'outro'", "'leia'", 
-		"'*'", "'+'", "'-'", "'/'", "'^'", "'('", "')'", "'verdadeiro'", "'falso'", 
+		"'^'", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "'verdadeiro'", "'falso'", 
 		"'='", "'<='", "'>='", "'>'", "'<'", "'<>'", "'nao'", "'e'", "'ou'", "'xor'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
@@ -173,9 +173,9 @@ public class EnquantoLexer extends Lexer {
 		"\2\2\u00bd\u00be\7<\2\2\u00be*\3\2\2\2\u00bf\u00c0\7q\2\2\u00c0\u00c1"+
 		"\7w\2\2\u00c1\u00c2\7v\2\2\u00c2\u00c3\7t\2\2\u00c3\u00c4\7q\2\2\u00c4"+
 		",\3\2\2\2\u00c5\u00c6\7n\2\2\u00c6\u00c7\7g\2\2\u00c7\u00c8\7k\2\2\u00c8"+
-		"\u00c9\7c\2\2\u00c9.\3\2\2\2\u00ca\u00cb\7,\2\2\u00cb\60\3\2\2\2\u00cc"+
-		"\u00cd\7-\2\2\u00cd\62\3\2\2\2\u00ce\u00cf\7/\2\2\u00cf\64\3\2\2\2\u00d0"+
-		"\u00d1\7\61\2\2\u00d1\66\3\2\2\2\u00d2\u00d3\7`\2\2\u00d38\3\2\2\2\u00d4"+
+		"\u00c9\7c\2\2\u00c9.\3\2\2\2\u00ca\u00cb\7`\2\2\u00cb\60\3\2\2\2\u00cc"+
+		"\u00cd\7,\2\2\u00cd\62\3\2\2\2\u00ce\u00cf\7\61\2\2\u00cf\64\3\2\2\2\u00d0"+
+		"\u00d1\7-\2\2\u00d1\66\3\2\2\2\u00d2\u00d3\7/\2\2\u00d38\3\2\2\2\u00d4"+
 		"\u00d5\7*\2\2\u00d5:\3\2\2\2\u00d6\u00d7\7+\2\2\u00d7<\3\2\2\2\u00d8\u00d9"+
 		"\7x\2\2\u00d9\u00da\7g\2\2\u00da\u00db\7t\2\2\u00db\u00dc\7f\2\2\u00dc"+
 		"\u00dd\7c\2\2\u00dd\u00de\7f\2\2\u00de\u00df\7g\2\2\u00df\u00e0\7k\2\2"+

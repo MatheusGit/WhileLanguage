@@ -1,4 +1,4 @@
-para i de 0 ate 6 faca {
+para i de 10 ate 6 faca {
 	escreva i
 };
 nota := leia;
@@ -10,9 +10,15 @@ se nota >= 6 entao
       exiba "Recuperação2"
     senao
       exiba "Reprovado";
-      
+x := 2+3*5^2;
+escreva x;
+x := 8/4*2;
+escreva x;
+x := 8*4/2;
+escreva x;
 x := 30;
 escolha x
     caso 10 : exiba "um"
     caso 20 : exiba "dois"
     outro  : exiba "outro numero"
+    
