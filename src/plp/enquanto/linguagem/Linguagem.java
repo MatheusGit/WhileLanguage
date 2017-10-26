@@ -51,11 +51,10 @@ public interface Linguagem {
 	class Para implements Comando {
 				
 		private Comando comando;
-		private Expressao de, ate;
-		private int passo;
+		private Expressao de, ate, passo;
 		private String para;	
 		
-		public Para(String para ,Expressao de, Expressao ate, int passo, Comando comando) {
+		public Para(String para ,Expressao de, Expressao ate, Expressao passo, Comando comando) {
 			this.de = de;
 			this.ate = ate;
 			this.para = para;
@@ -69,13 +68,13 @@ public interface Linguagem {
 				ambiente.put(para, de.getValor());
 				while(ate.getValor() >= ambiente.get(para)) {
 					comando.execute();
-					ambiente.put(para, ambiente.get(para)+passo);
+					ambiente.put(para, ambiente.get(para)+ (passo == null ? 1 : passo.getValor()));
 				}; 
 			}else {
 				ambiente.put(para, de.getValor());
 				while(ate.getValor() <= ambiente.get(para)) {
 					comando.execute();
-					ambiente.put(para, ambiente.get(para)-passo);
+					ambiente.put(para, ambiente.get(para) - (passo == null ? 1 : passo.getValor()));
 				}; 
 			}
 		}

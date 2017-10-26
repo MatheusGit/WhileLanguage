@@ -1,24 +1,7 @@
-para i de 10 ate 6 faca {
-	escreva i
-};
-nota := leia;
-se nota >= 6 entao
-      exiba "Aprovado"
-    senaose nota > 4 entao
-      exiba "Recuperação"
-    senaose nota > 2 entao
-      exiba "Recuperação2"
-    senao
-      exiba "Reprovado";
-x := 2+3*5^2;
-escreva x;
-x := 8/4*2;
-escreva x;
-x := 8*4/2;
-escreva x;
-x := 30;
-escolha x
-    caso 10 : exiba "um"
-    caso 20 : exiba "dois"
-    outro  : exiba "outro numero"
-    
+x := 1;
+a := leia;
+escolha a
+	caso x: escreva x
+	caso 10: exiba "de"
+	caso 20: exiba "erro"
+	outro: exiba "erro"

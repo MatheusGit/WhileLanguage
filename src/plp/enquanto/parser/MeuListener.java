@@ -69,10 +69,9 @@ public class MeuListener extends EnquantoBaseListener {
 		final Expressao de = (Expressao) getValue(ctx.expressao(0));
 		final Expressao ate = (Expressao) getValue(ctx.expressao(1));
 		final Expressao passo = (Expressao) getValue(ctx.expressao(2));
-		final int passoStr = passo != null ? passo.getValor() : 1;
 		final String para = (String) ctx.ID().getText();
 		final Comando comando = (Comando) getValue(ctx.comando());
-		setValue(ctx, new Para(para, de, ate, passoStr, comando));
+		setValue(ctx, new Para(para, de, ate, passo, comando));
 	}
 	
 	@Override
